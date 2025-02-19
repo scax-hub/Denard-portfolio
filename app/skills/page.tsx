@@ -30,7 +30,13 @@ const skills = {
   ],
 };
 
-const SkillCategory = ({ title, skills, delay = 0 }) => (
+interface SkillCategoryProps {
+  title: string;
+  skills: { name: string; level: number; experience: string; }[];
+  delay?: number;
+}
+
+const SkillCategory = ({ title, skills, delay = 0 }: SkillCategoryProps) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
@@ -41,7 +47,7 @@ const SkillCategory = ({ title, skills, delay = 0 }) => (
         <CardTitle>{title}</CardTitle>
       </CardHeader>
       <CardContent className="space-y-6">
-        {skills.map((skill, index) => (
+        {skills.map((skill, _index: number) => (
           <TooltipProvider key={skill.name}>
             <Tooltip>
               <TooltipTrigger asChild>
